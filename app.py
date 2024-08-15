@@ -4,10 +4,10 @@ import openai
 from flask_cors import CORS
 from dotenv import load_dotenv
 
-# Load environment variables from .env file
+
 load_dotenv()
 
-# Initialize OpenAI with the API key
+
 openai.api_key = os.getenv('OPENAI_API_KEY')
 
 app = Flask(__name__)
@@ -17,6 +17,7 @@ CORS(app, resources={r"/*": {"origins": "*"}})  # Allow requests from all origin
 def chat():
     data = request.get_json()
     prompt = data.get('prompt')
+    preDefinedComponents = data.get('componentCode')
     
     modified_prompt = f"Please generate the code for a component based on the following prompt. Only include the code with no extra explanation or description.\n\nPrompt: {prompt}\n\nCode:"
 
